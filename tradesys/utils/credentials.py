@@ -47,9 +47,3 @@ class TradingCredentials():
             'client_secret': self.client_secret,
             'subscription_id': self.subscription_id
         }
-
-
-if __name__ == '__main__':
-
-    trading_credentials_client = TradingCredentials()
-    print(trading_credentials_client.to_dict())

@@ -7,9 +7,9 @@ class AzureTemplates():
     def __init__(self) -> None:
 
         self.template_folder = pathlib.Path(
-            __file__).parents[1].joinpath('templates/')
+            __file__).parents[1].joinpath('azure/templates/')
         self.response_folder = pathlib.Path(
-            __file__).parents[1].joinpath('responses/')
+            __file__).parents[1].joinpath('azure/responses/')
 
     def load_template(self, template_name: str) -> dict:
         """Loads an azure template file.
@@ -36,10 +36,3 @@ class AzureTemplates():
 
         with open(file=file_name, mode='w+') as temp_file:
             return json.dump(fp=temp_file, obj=response_dict, indent=2)
-
-
-if __name__ == '__main__':
-
-    template_loader = AzureTemplates()
-    print(template_loader.template_folder)
-    print(template_loader.load_template('key_vault'))

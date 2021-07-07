@@ -1,6 +1,7 @@
 from azure.mgmt.keyvault import KeyVaultManagementClient
 from azure.core.exceptions import ResourceNotFoundError
 
+
 class TradingFactoryKeyVault():
 
     def __init__(self, trading_sys_client: object) -> None:
@@ -21,7 +22,7 @@ class TradingFactoryKeyVault():
         self._management_client = key_vault_client
 
         return self._management_client
-    
+
     def does_exist(self, resource_group_name: str, vault_name: str) -> bool:
 
         try:
@@ -35,13 +36,15 @@ class TradingFactoryKeyVault():
         except ResourceNotFoundError:
             return False
 
-
     def setup(self, resource_group_name: str, value_name: str) -> None:
 
         if not self.does_exist(resource_group_name=resource_group_name, vault_name=value_name,):
 
             # Setup the template.
-            KEY_VAULT_TEMPLATE = self._trading_system.templates_client.load_template('key_vault')
+            KEY_VAULT_TEMPLATE = self._trading_system.templates_client.load_template(
+                'key_vault'
+            )
+            
             KEY_VAULT_TEMPLATE['properties']['tenant_id'] = self._trading_system.credentials_client.tenant_id
             KEY_VAULT_TEMPLATE['properties']['access_policies'][0]['tenant_id'] = self._trading_system.credentials_client.tenant_id
 
@@ -57,5 +60,3 @@ class TradingFactoryKeyVault():
                 file_name='key_vault',
                 response_dict=create_operation.result().as_dict()
             )
-
-

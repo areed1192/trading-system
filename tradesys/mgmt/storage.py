@@ -1,6 +1,7 @@
 from azure.mgmt.storage import StorageManagementClient
 from azure.core.exceptions import ResourceNotFoundError
 
+
 class TradingFactoryStorage():
 
     def __init__(self, trading_sys_client: object) -> None:
@@ -21,7 +22,7 @@ class TradingFactoryStorage():
         self._management_client = mgmt_client
 
         return self._management_client
-    
+
     def does_exist(self, resource_group_name: str, account_name: str) -> bool:
 
         try:
@@ -36,13 +37,14 @@ class TradingFactoryStorage():
         except ResourceNotFoundError:
             return False
 
-
     def setup(self, resource_group_name: str, account_name: str) -> None:
 
         if not self.does_exist(resource_group_name=resource_group_name, account_name=account_name):
 
             # Setup the template.
-            STORAGE_TEMPLATE = self._trading_system.templates_client.load_template('storage_account')
+            STORAGE_TEMPLATE = self._trading_system.templates_client.load_template(
+                'storage_account'
+            )
 
             # Create the Storage Account.
             create_operation = self.management_client.storage_accounts.begin_create(
@@ -56,5 +58,3 @@ class TradingFactoryStorage():
                 file_name='storage_account',
                 response_dict=create_operation.result().as_dict()
             )
-
-
