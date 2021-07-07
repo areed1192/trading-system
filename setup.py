@@ -7,7 +7,7 @@ with open(file="README.md", mode="r") as fh:
 
 setup(
 
-    name='',
+    name='py-trade-system',
 
     # Define Author Info.
     author='Alex Reed',
@@ -22,18 +22,22 @@ setup(
     long_description_content_type="text/markdown",
 
     # Define repo location.
-    url='',
+    url='https://github.com/areed1192/trading-system',
 
     # Define dependencies.
-    install_requires=[],
+    install_requires=[
+
+    ],
 
     # Specify folder content.
     packages=find_namespace_packages(
-        include=[]
+        include=[
+            'tradesys'
+        ]
     ),
 
     # Define the python version.
-    python_requires='>3.7',
+    python_requires='>3.9',
 
     # Define our classifiers.
     classifiers=[

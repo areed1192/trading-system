@@ -1,0 +1,72 @@
+{
+  "id": "/subscriptions/02e9af42-b208-48c8-904b-e226a0617c86/resourceGroups/azure-data-migration/providers/Microsoft.KeyVault/vaults/azure-migration-vault",
+  "name": "azure-migration-vault",
+  "type": "Microsoft.KeyVault/vaults",
+  "location": "eastus",
+  "tags": {},
+  "properties": {
+    "tenant_id": "adacdae5-3dcd-4f38-9749-fb447d12e560",
+    "sku": {
+      "family": "A",
+      "name": "standard"
+    },
+    "access_policies": [
+      {
+        "tenant_id": "adacdae5-3dcd-4f38-9749-fb447d12e560",
+        "object_id": "00000000-0000-0000-0000-000000000000",
+        "permissions": {
+          "keys": [
+            "encrypt",
+            "decrypt",
+            "wrapKey",
+            "unwrapKey",
+            "sign",
+            "verify",
+            "get",
+            "list",
+            "create",
+            "update",
+            "import",
+            "delete",
+            "backup",
+            "restore",
+            "recover",
+            "purge"
+          ],
+          "secrets": [
+            "get",
+            "list",
+            "set",
+            "delete",
+            "backup",
+            "restore",
+            "recover",
+            "purge"
+          ],
+          "certificates": [
+            "get",
+            "list",
+            "delete",
+            "create",
+            "import",
+            "update",
+            "managecontacts",
+            "getissuers",
+            "listissuers",
+            "setissuers",
+            "deleteissuers",
+            "manageissuers",
+            "recover",
+            "purge"
+          ]
+        }
+      }
+    ],
+    "vault_uri": "https://azure-migration-vault.vault.azure.net/",
+    "enabled_for_deployment": true,
+    "enabled_for_disk_encryption": true,
+    "enabled_for_template_deployment": true,
+    "enable_soft_delete": true,
+    "provisioning_state": "Succeeded"
+  }
+}

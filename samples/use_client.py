@@ -1,10 +1,5 @@
-from configparser import ConfigParser
+from tradesys.client import TradingSystem
 
-# Initialize the Parser.
-config = ConfigParser()
+trading_system_client = TradingSystem()
 
-# Read the file.
-config.read('configs/config.ini')
-
-# Get the specified credentials.
-config.get('main', '')
+print(trading_system_client.key_vault()._trading_system)
