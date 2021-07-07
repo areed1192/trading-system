@@ -4,3 +4,6 @@ azure-keyvault-secrets==4.3.0
 azure-mgmt-keyvault==9.0.0
 msrestazure==0.6.4
 azure-mgmt-resource==18.0.0
+azure-storage-blob==12.8.1
+azure-mgmt-sql==3.0.0
+azure-mgmt-storage==18.0.0

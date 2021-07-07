@@ -1,4 +1,3 @@
-from importlib.resources import path
 import pathlib
 from configparser import ConfigParser
 from azure.identity import DefaultAzureCredential

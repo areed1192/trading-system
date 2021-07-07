@@ -1,0 +1,10 @@
+{
+  "sku": {
+    "name": "Standard_GRS"
+  },
+  "kind": "StorageV2",
+  "location": "eastus2",
+  "tags": {
+    "project": "trading-system"
+  }
+}
