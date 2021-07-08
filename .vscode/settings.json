@@ -1,4 +1,5 @@
 {
   "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+  "azureML.defaultWorkspaceId": "/subscriptions/1c7dee43-5fce-4a52-9a52-c34aa004dfbc/resourceGroups/azure-data-migration/providers/Microsoft.MachineLearningServices/workspaces/sigma-machine-learning"
 }

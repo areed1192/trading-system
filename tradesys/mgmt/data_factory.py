@@ -1,12 +1,12 @@
-from azure.mgmt.keyvault import KeyVaultManagementClient
+from azure.mgmt.datafactory import DataFactoryManagementClient
 from azure.core.exceptions import ResourceNotFoundError
 
 
-class TradingFactoryVaultClient():
+class TradingFactoryManagementClient():
 
     def __init__(self, trading_sys_client: object) -> None:
-        """Initializes the `TradingFactoryVaultClient`, which can be
-        used to manage Azure vault resources.
+        """Initializes the `TradingFactoryManagementClient`, which can be
+        used to manage Azure Data Factory resources.
 
         ### Arguments:
         ----
@@ -19,26 +19,26 @@ class TradingFactoryVaultClient():
         self._management_client = None
 
     @property
-    def management_client(self) -> KeyVaultManagementClient:
-        """Provides access to the `KeyVaultManagementClient`.
+    def management_client(self) -> DataFactoryManagementClient:
+        """Provides access to the `DataFactoryManagementClient`.
 
         ### Returns:
         ----
-        KeyVaultManagementClient:
-            An authorized instance of the `KeyVaultManagementClient``.
+        DataFactoryManagementClient:
+            An authorized instance of the `DataFactoryManagementClient``.
         """
 
         # Define a new KeyVaultManagement Client.
-        key_vault_client = KeyVaultManagementClient(
+        data_factory_client = DataFactoryManagementClient(
             credential=self._trading_system.credentials_client.azure_credentials,
             subscription_id=self._trading_system.credentials_client.subscription_id
         )
 
-        self._management_client = key_vault_client
+        self._management_client = data_factory_client
 
         return self._management_client
 
-    def does_exist(self, resource_group_name: str, vault_name: str) -> bool:
+    def does_exist(self, resource_group_name: str, factory_name: str) -> bool:
         """Determines whether the given resource exists in the specified resource
         group.
 
@@ -49,7 +49,7 @@ class TradingFactoryVaultClient():
             The name is case insensitive.
 
         vault_name (str):
-            Name of the vault.
+            The data factory name.
 
         ### Returns:
         ----
@@ -58,9 +58,9 @@ class TradingFactoryVaultClient():
         """
 
         try:
-            vault_dict = self.management_client.vaults.get(
+            vault_dict = self.management_client.factories.get(
                 resource_group_name=resource_group_name,
-                vault_name=vault_name
+                factory_name=factory_name
             )
             if 'id' in vault_dict.as_dict():
                 return True
@@ -68,8 +68,8 @@ class TradingFactoryVaultClient():
         except ResourceNotFoundError:
             return False
 
-    def setup(self, resource_group_name: str, value_name: str) -> None:
-        """Creates a new Azure Key Vault resource in the designated resource group
+    def setup(self, resource_group_name: str, factory_name: str) -> None:
+        """Creates a new Azure Data Factory resource in the designated resource group
         with the specificed name.
 
         ### Arguments:
@@ -78,15 +78,15 @@ class TradingFactoryVaultClient():
             The name of the resource group within the user's subscription.
             The name is case insensitive.
 
-        vault_name (str):
-            Name of the vault.
+        factory_name (str):
+            Name of the data factory.
         """
 
-        if not self.does_exist(resource_group_name=resource_group_name, vault_name=value_name):
+        if not self.does_exist(resource_group_name=resource_group_name, factory_name=factory_name):
 
             # Setup the template.
-            KEY_VAULT_TEMPLATE = self._trading_system.templates_client.load_template(
-                'key_vault'
+            FACTORY_TEMPLATE = self._trading_system.templates_client.load_template(
+                'data_factory'
             )
 
             KEY_VAULT_TEMPLATE['properties']['tenant_id'] = self._trading_system.credentials_client.tenant_id

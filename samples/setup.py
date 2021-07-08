@@ -5,6 +5,7 @@ from azure.mgmt.keyvault import KeyVaultManagementClient
 from azure.mgmt.authorization import AuthorizationManagementClient
 from azure.mgmt.storage import StorageManagementClient
 
+
 # Initialize the Parser.
 config = ConfigParser()
 
