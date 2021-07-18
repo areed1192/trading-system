@@ -48,7 +48,7 @@ class TradingFactoryManagementClient():
             The name of the resource group within the user's subscription.
             The name is case insensitive.
 
-        vault_name (str):
+        factory_name (str):
             The data factory name.
 
         ### Returns:
@@ -89,24 +89,21 @@ class TradingFactoryManagementClient():
                 'data_factory'
             )
 
-            KEY_VAULT_TEMPLATE['properties']['tenant_id'] = self._trading_system.credentials_client.tenant_id
-            KEY_VAULT_TEMPLATE['properties']['access_policies'][0]['tenant_id'] = self._trading_system.credentials_client.tenant_id
-
             # Create the Key Vault.
-            create_operation = self.management_client.vaults.begin_create_or_update(
+            create_operation = self.management_client.factories.create_or_update(
                 resource_group_name=resource_group_name,
-                vault_name=value_name,
-                parameters=KEY_VAULT_TEMPLATE
+                factory_name=factory_name,
+                factory=FACTORY_TEMPLATE
             )
 
             # Save the response.
             self._trading_system.templates_client.save_response(
-                file_name='key_vault',
-                response_dict=create_operation.result().as_dict()
+                file_name='factory',
+                response_dict=create_operation.as_dict()
             )
 
-    def delete(self, resource_group_name: str, vault_name: str, purge_delete: bool = False, region_name: str = None) -> None:
-        """Deletes an Azure Key Vault and Purges it if specified.
+    def delete(self, resource_group_name: str, factory_name: str) -> None:
+        """Deletes an Azure Data Factory
 
         ### Arguments:
         ----
@@ -114,46 +111,24 @@ class TradingFactoryManagementClient():
             The name of the resource group within the user's subscription.
             The name is case insensitive.
 
-        vault_name (str):
-            Name of the vault.
-
-        purge_delete (bool): (optional, Default=False)
-            Specifies whether you would like to Purge the soft deleted vault
-            `True` or not `False`.
-
-        region_name (str): (optional, Default=None)
-            The location of the soft-deleted vault. Must be set if
-            `purge_delete` is `True`.
+        factory_name (str):
+            Name of the data factory.
         """
 
-        if self.does_exist(resource_group_name=resource_group_name, vault_name=vault_name):
+        if self.does_exist(resource_group_name=resource_group_name, factory_name=factory_name):
 
-            self.management_client.vaults.delete(
+            self.management_client.factories.delete(
                 resource_group_name=resource_group_name,
-                vault_name=vault_name
+                factory_name=factory_name
             )
 
             response = {
-                'message': f'Azure Key Vault {vault_name} deleted.'
+                'message': f'Azure Data Factory {factory_name} deleted.'
             }
-
-            if purge_delete and region_name is not None:
-
-                self.management_client.vaults.begin_purge_deleted(
-                    location=region_name,
-                    vault_name=vault_name
-                )
-                response = {
-                    'message': f'Azure Key Vault {vault_name} deleted & purged.'
-                }
-
-            elif purge_delete and region_name is None:
-                raise ValueError(
-                    "Purge delete must have the location of the soft deleted vault.")
 
         else:
             response = {
-                'message': f'Azure Key Vault {vault_name} does not exist.'
+                'message': f'Azure Data Factory {factory_name} does not exist.'
             }
 
         return response

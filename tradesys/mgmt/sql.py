@@ -111,17 +111,23 @@ class TradingFactorySqlClient():
 
         return response
 
-    def setup_server(self, resource_group_name: str, server_name: str) -> None:
+    def setup_server(self, resource_group_name: str, server_name: str, username: str, password: str) -> None:
         """Creates a new Azure SQL Server.
 
         ### Arguments:
         ----
-        resource_group_name (str):
+        resource_group_name : str
             The name of the resource group within the user's subscription.
             The name is case insensitive.
 
-        server_name (str): (optional, Default=None)
+        server_name : str
             The name of the server.
+
+        username : str
+            The username you want set for the server.
+
+        password : str
+            The password you want set for the server.
         """
 
         if not self.does_exist(resource_group_name=resource_group_name, server_name=server_name)['server_resource']['does_exist']:
@@ -130,6 +136,9 @@ class TradingFactorySqlClient():
             SERVER_TEMPLATE = self._trading_system.templates_client.load_template(
                 'server'
             )
+
+            SERVER_TEMPLATE['properties']['administratorLogin'] = username
+            SERVER_TEMPLATE['properties']['administratorLoginPassword'] = password
 
             # Create the Storage Account.
             create_operation = self.management_client.servers.begin_create_or_update(

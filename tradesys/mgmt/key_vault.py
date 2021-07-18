@@ -68,7 +68,7 @@ class TradingFactoryVaultClient():
         except ResourceNotFoundError:
             return False
 
-    def setup(self, resource_group_name: str, value_name: str) -> None:
+    def setup(self, resource_group_name: str, vault_name: str) -> None:
         """Creates a new Azure Key Vault resource in the designated resource group
         with the specificed name.
 
@@ -82,7 +82,7 @@ class TradingFactoryVaultClient():
             Name of the vault.
         """
 
-        if not self.does_exist(resource_group_name=resource_group_name, vault_name=value_name):
+        if not self.does_exist(resource_group_name=resource_group_name, vault_name=vault_name):
 
             # Setup the template.
             KEY_VAULT_TEMPLATE = self._trading_system.templates_client.load_template(
@@ -95,7 +95,7 @@ class TradingFactoryVaultClient():
             # Create the Key Vault.
             create_operation = self.management_client.vaults.begin_create_or_update(
                 resource_group_name=resource_group_name,
-                vault_name=value_name,
+                vault_name=vault_name,
                 parameters=KEY_VAULT_TEMPLATE
             )
 
