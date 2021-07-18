@@ -1,0 +1,12 @@
+{
+  "location": "eastus2",
+  "properties": {
+    "repoConfiguration": {
+      "accountName": "areed1192",
+      "repositoryName": "trading-system",
+      "collaborationBranch": "master",
+      "rootFolder": "/data-factory",
+      "type": "FactoryGitHubConfiguration"
+    }
+  }
+}

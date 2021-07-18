@@ -1,0 +1,56 @@
+{
+  "id": "/subscriptions/02e9af42-b208-48c8-904b-e226a0617c86/resourceGroups/azure-data-migration/providers/Microsoft.Storage/storageAccounts/tradingsystem",
+  "name": "tradingsystem",
+  "type": "Microsoft.Storage/storageAccounts",
+  "tags": {
+    "project": "trading-system"
+  },
+  "location": "eastus2",
+  "sku": {
+    "name": "Standard_GRS",
+    "tier": "Standard"
+  },
+  "kind": "StorageV2",
+  "provisioning_state": "Succeeded",
+  "primary_endpoints": {
+    "blob": "https://tradingsystem.blob.core.windows.net/",
+    "queue": "https://tradingsystem.queue.core.windows.net/",
+    "table": "https://tradingsystem.table.core.windows.net/",
+    "file": "https://tradingsystem.file.core.windows.net/",
+    "web": "https://tradingsystem.z20.web.core.windows.net/",
+    "dfs": "https://tradingsystem.dfs.core.windows.net/"
+  },
+  "primary_location": "eastus2",
+  "status_of_primary": "available",
+  "secondary_location": "centralus",
+  "status_of_secondary": "available",
+  "creation_time": "2021-07-08T02:10:51.101842Z",
+  "key_creation_time": {
+    "key1": "2021-07-08T02:10:51.211217Z",
+    "key2": "2021-07-08T02:10:51.211217Z"
+  },
+  "encryption": {
+    "services": {
+      "blob": {
+        "enabled": true,
+        "last_enabled_time": "2021-07-08T02:10:51.211217Z",
+        "key_type": "Account"
+      },
+      "file": {
+        "enabled": true,
+        "last_enabled_time": "2021-07-08T02:10:51.211217Z",
+        "key_type": "Account"
+      }
+    },
+    "key_source": "Microsoft.Storage"
+  },
+  "access_tier": "Hot",
+  "enable_https_traffic_only": true,
+  "network_rule_set": {
+    "bypass": "AzureServices",
+    "virtual_network_rules": [],
+    "ip_rules": [],
+    "default_action": "Allow"
+  },
+  "private_endpoint_connections": []
+}

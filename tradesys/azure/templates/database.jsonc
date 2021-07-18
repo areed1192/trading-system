@@ -1,0 +1,12 @@
+{
+  "location": "eastus2",
+  "sku": {
+    "name": "GP_S_Gen5_1",
+    "tier": "GeneralPurpose"
+  },
+  "properties": {
+    "createMode": "Default",
+    "collation": "SQL_Latin1_General_CP1_CI_AS",
+    "maxSizeBytes": 34359738368
+  }
+}

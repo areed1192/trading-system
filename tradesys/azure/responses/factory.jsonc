@@ -1,0 +1,11 @@
+{
+  "id": "/subscriptions/02e9af42-b208-48c8-904b-e226a0617c86/resourceGroups/azure-data-migration/providers/Microsoft.DataFactory/factories/trading-factory",
+  "name": "trading-factory",
+  "type": "Microsoft.DataFactory/factories",
+  "location": "eastus2",
+  "tags": {},
+  "e_tag": "\"02020967-0000-0200-0000-60ea64900000\"",
+  "provisioning_state": "Succeeded",
+  "create_time": "2021-07-11T03:25:03.969233Z",
+  "version": "2018-06-01"
+}
