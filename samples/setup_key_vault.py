@@ -12,6 +12,10 @@ config.read('config/config.ini')
 # Grab the Azure Credentials needed.
 iex_api_key = config.get('iex', 'api-key')
 sql_connection_string = config.get('sql', 'connection-string')
+blob_storage_connectiong_string = config.get(
+    'blob_storage',
+    'connection-string'
+)
 
 # Initialize our Trading System.
 trading_system_client = TradingSystem()
@@ -84,11 +88,14 @@ secret_client.set_secret(
     value=iex_api_key
 )
 
-
 # Set a Secret.
 secret_client.set_secret(
     name='sql-database-connection-string',
     value=sql_connection_string
 )
 
-# https://docs.microsoft.com/en-us/rest/api/keyvault/vaults/update-access-policy
+# Set a Secret.
+secret_client.set_secret(
+    name='azure-blob-connection-string',
+    value=blob_storage_connectiong_string
+)

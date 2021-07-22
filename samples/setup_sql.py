@@ -39,3 +39,15 @@ if CREATE_DATABASE:
         server_name='sigma-sql-server',
         database_name='trading-data'
     )
+
+# Update the firewall rules so we allow other Azure Resources to access this database.
+# We will need this since the plan is to access this Database from the Trading Factory.
+trade_sys_sql_client.management_client.firewall_rules.create_or_update(
+    resource_group_name='azure-data-migration',
+    server_name='sigma-sql-server',
+    firewall_rule_name='AllowAllWindowsAzureIps',
+    parameters={
+        "startIpAddress": "0.0.0.0",
+        "endIpAddress": "0.0.0.0"
+    }
+)
