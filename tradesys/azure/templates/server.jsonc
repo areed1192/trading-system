@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "administratorLogin": "<SQL_USERNAME>",
+    "administratorLoginPassword": "<SQL_PASSWORD>",
+    "administrators": {
+      "principalType": "User",
+      "login": "<ADMIN_LOGIN_USERNAME>",
+      "sid": "<ADMIN_SID>",
+      "tenantId": "<ADMIN_TENANT_ID>",
+      "azureADOnlyAuthentication": false
+    },
+    "publicNetworkAccess": "Disabled",
+    "restrictOutboundNetworkAccess": "Enabled"
+  },
+  "location": "eastus2"
+}
