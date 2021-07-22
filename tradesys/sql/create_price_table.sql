@@ -21,4 +21,4 @@ CREATE TABLE iex_prices
     [label] VARCHAR(20),
     [change] NUMERIC(38),
     [changePercent] DECIMAL(15, 4)
-)
+);
