@@ -5,7 +5,11 @@ CREATE USER [trading-factory] FROM EXTERNAL PROVIDER;
 
 -- Here I'm saying it can write data.
 ALTER ROLE db_datawriter ADD MEMBER [trading-factory];
+
+-- Here I'm saying it can read data.
 ALTER ROLE db_datareader ADD MEMBER [trading-factory];
+
+-- Here I'm saying it owns the database.
 ALTER ROLE db_owner ADD MEMBER [trading-factory];
 
 -- HERE ARE OTHER ROLES:

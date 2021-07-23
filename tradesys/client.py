@@ -1,9 +1,10 @@
 from tradesys.utils.templates import AzureTemplates
 from tradesys.utils.credentials import TradingCredentials
-from tradesys.mgmt.storage import TradingFactoryStorageClient
-from tradesys.mgmt.key_vault import TradingFactoryVaultClient
-from tradesys.mgmt.sql import TradingFactorySqlClient
-from tradesys.mgmt.data_factory import TradingFactoryManagementClient
+
+from azure.mgmt.sql import SqlManagementClient
+from azure.mgmt.storage import StorageManagementClient
+from azure.mgmt.keyvault import KeyVaultManagementClient
+from azure.mgmt.datafactory import DataFactoryManagementClient
 
 
 class TradingSystem():
@@ -18,7 +19,7 @@ class TradingSystem():
         return "<TradingSystem Initialized=True, Active=True>"
 
     @property
-    def vault_mgmt_client(self) -> TradingFactoryVaultClient:
+    def vault_mgmt_client(self) -> KeyVaultManagementClient:
         """Returns the Azure Key Vault Management Client.
 
         ### Overview:
@@ -30,14 +31,20 @@ class TradingSystem():
 
         ### Returns:
         ----
-        TradingFactoryVaultClient:
+        KeyVaultManagementClient:
             An authenticated instance of a `KeyVaultManagementClient`.
         """
 
-        return TradingFactoryVaultClient(trading_sys_client=self)
+        # Define a new `KeyVaultManagementClient`.
+        key_vault_mgmt_client = KeyVaultManagementClient(
+            credential=self.credentials_client.azure_credentials,
+            subscription_id=self.credentials_client.subscription_id
+        )
+
+        return key_vault_mgmt_client
 
     @property
-    def storage_mgmt_client(self) -> TradingFactoryStorageClient:
+    def storage_mgmt_client(self) -> StorageManagementClient:
         """Returns the Azure Storage Management Client.
 
         ### Overview:
@@ -49,14 +56,20 @@ class TradingSystem():
 
         ### Returns:
         ----
-        TradingFactoryStorageClient:
+        StorageManagementClient:
             An authenticated instance of a `StorageManagementClient`.
         """
 
-        return TradingFactoryStorageClient(trading_sys_client=self)
+        # Create a new `StorageManagementClient`.
+        storage_mgmt_client = StorageManagementClient(
+            credential=self.credentials_client.azure_credentials,
+            subscription_id=self.credentials_client.subscription_id
+        )
+
+        return storage_mgmt_client
 
     @property
-    def sql_mgmt_client(self) -> TradingFactorySqlClient:
+    def sql_mgmt_client(self) -> SqlManagementClient:
         """Returns the Azure SQL Management Client.
 
         ### Overview:
@@ -68,14 +81,20 @@ class TradingSystem():
 
         ### Returns:
         ----
-        TradingFactorySqlClient:
+        SqlManagementClient:
             An authenticated instance of a `TradingFactorySqlClient`.
         """
 
-        return TradingFactorySqlClient(trading_sys_client=self)
+        # Create a new `SqlManagmentClient`.
+        sql_mgmt_client = SqlManagementClient(
+            credential=self.credentials_client.azure_credentials,
+            subscription_id=self.credentials_client.subscription_id
+        )
+
+        return sql_mgmt_client
 
     @property
-    def factory_mgmt_client(self) -> TradingFactoryManagementClient:
+    def factory_mgmt_client(self) -> DataFactoryManagementClient:
         """Returns the Azure Data Factory Management Client.
 
         ### Overview:
@@ -87,8 +106,14 @@ class TradingSystem():
 
         ### Returns:
         ----
-        TradingFactoryManagementClient:
+        DataFactoryManagementClient:
             An authenticated instance of a `TradingFactoryManagementClient`.
         """
 
-        return TradingFactoryManagementClient(trading_sys_client=self)
+        # Create a new `DataFactoryManagmentClient`.
+        data_factory_mgmt_client = DataFactoryManagementClient(
+            credential=self.credentials_client.azure_credentials,
+            subscription_id=self.credentials_client.subscription_id
+        )
+
+        return data_factory_mgmt_client

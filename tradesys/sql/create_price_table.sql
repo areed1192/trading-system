@@ -1,4 +1,4 @@
-CREATE TABLE iex_prices
+CREATE TABLE [iex_prices]
 (
     [close] DECIMAL(15, 4),
     [high] DECIMAL(15, 4),
