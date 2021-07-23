@@ -8,7 +8,6 @@ ALTER ROLE db_datawriter ADD MEMBER [trading-factory];
 ALTER ROLE db_datareader ADD MEMBER [trading-factory];
 ALTER ROLE db_owner ADD MEMBER [trading-factory];
 
-
 -- HERE ARE OTHER ROLES:
 --------------------------------------------
 -- DatabaseRoleName         DatabaseUserName

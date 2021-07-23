@@ -21,7 +21,7 @@ trade_sys_sql_client = trade_sys_client.sql_mgmt_client
 CREATE_SERVER = False
 CREATE_DATABASE = False
 
-# Create the Server.
+# Step 1: Create the `Server` object.
 if CREATE_SERVER:
 
     trade_sys_sql_client.setup_server(
@@ -31,7 +31,7 @@ if CREATE_SERVER:
         password=sql_password
     )
 
-# Create the database.
+# Step 2: Create the `Database` object.
 if CREATE_DATABASE:
 
     trade_sys_sql_client.setup_database(
@@ -40,8 +40,7 @@ if CREATE_DATABASE:
         database_name='trading-data'
     )
 
-# Update the firewall rules so we allow other Azure Resources to access this database.
-# We will need this since the plan is to access this Database from the Trading Factory.
+# Step 3: Set the `FirewallRules` so that other Azure Resources (Data Factory) can access this database.
 trade_sys_sql_client.management_client.firewall_rules.create_or_update(
     resource_group_name='azure-data-migration',
     server_name='sigma-sql-server',

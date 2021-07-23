@@ -27,7 +27,7 @@ vault_mgmt_client = trading_system_client.vault_mgmt_client
 CREATE_KEY_VAULT = False
 UPDATE_ACCESS_POLICY = False
 
-# Create the Key Vault.
+# Step 1: Create our `AzureKeyVault` resource.
 if CREATE_KEY_VAULT:
 
     vault_mgmt_client.setup(
@@ -41,11 +41,7 @@ key_vault = vault_mgmt_client.management_client.vaults.get(
     vault_name='azure-migration-vault'
 )
 
-pprint(
-    key_vault.as_dict()
-)
-
-# Update the access policy.
+# Step 2: Update the `AccessPolicy` for our Key Vault so that our Data Factory can read it.
 if UPDATE_ACCESS_POLICY:
 
     # update the access policy so we can add a secret.
@@ -76,25 +72,25 @@ if UPDATE_ACCESS_POLICY:
         }
     )
 
-# Create a Secret Client.
+# Step 3: Define a new `SecretClient` so we can upload secrets.
 secret_client = SecretClient(
     vault_url=key_vault.properties.vault_uri,
     credential=trading_system_client.credentials_client.azure_credentials
 )
 
-# Set a Secret.
+# Step 4: Set our IEX API Key.
 secret_client.set_secret(
     name='iex-api-key',
     value=iex_api_key
 )
 
-# Set a Secret.
+# Step 5: Set our SQL Connection String.
 secret_client.set_secret(
     name='sql-database-connection-string',
     value=sql_connection_string
 )
 
-# Set a Secret.
+# Step 6: Set our Azure Blob Connection String.
 secret_client.set_secret(
     name='azure-blob-connection-string',
     value=blob_storage_connectiong_string
