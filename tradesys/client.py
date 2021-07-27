@@ -87,7 +87,7 @@ class TradingSystem():
 
         # Create a new `SqlManagmentClient`.
         sql_mgmt_client = SqlManagementClient(
-            credential=self.credentials_client.azure_credentials,
+            credentials=self.credentials_client.azure_credentials,
             subscription_id=self.credentials_client.subscription_id
         )
 
