@@ -17,7 +17,7 @@ setup(
     version='0.1.0',
 
     # Define descriptions.
-    description='',
+    description='A python application that leverages Microsoft Azure to build a fully functional trading system.',
     long_description=long_description,
     long_description_content_type="text/markdown",
 
