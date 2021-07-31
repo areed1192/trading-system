@@ -11,6 +11,9 @@ class AzureTemplates():
         self.template_folder = main_directory.joinpath('azure/templates/')
         self.response_folder = main_directory.joinpath('azure/responses/')
 
+        if not self.response_folder.exists():
+            self.response_folder.mkdir()
+
     def load_template(self, template_name: str) -> dict:
         """Loads an azure template file.
 
