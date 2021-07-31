@@ -19,10 +19,10 @@ you can develop machine learning models to help generate signals that can be use
 
 ## Requirements
 
-1.A Microsoft Azure Subscription.
-2.The Azure CLI installed on your system.
-3.A IEX API Key.
-4.A TD Ameritrade Account.
+1. A Microsoft Azure Subscription.
+2. The Azure CLI installed on your system.
+3. A IEX API Key.
+4. A TD Ameritrade Account.
 
 ## Setup
 

@@ -1,6 +1,5 @@
 from configparser import ConfigParser
 from tradesys.client import TradingSystem
-from azure.keyvault.secrets import SecretClient
 
 # Initialize the Parser.
 config = ConfigParser()
@@ -77,34 +76,3 @@ if UPDATE_ACCESS_POLICY:
             }
         }
     )
-
-
-# Step 5: Grab our new `AzureKeyVault` resource.
-key_vault = vault_mgmt_client.vaults.get(
-    resource_group_name='azure-data-migration',
-    vault_name='azure-migration-vault'
-)
-
-# Step 6: Define a new `SecretClient` so we can upload secrets.
-secret_client = SecretClient(
-    vault_url=key_vault.properties.vault_uri,
-    credential=trading_system_client.credentials_client.azure_credentials
-)
-
-# Step 7: Set our IEX API Key.
-secret_client.set_secret(
-    name='iex-api-key',
-    value=iex_api_key
-)
-
-# Step 8: Set our SQL Connection String.
-secret_client.set_secret(
-    name='sql-database-connection-string',
-    value=sql_connection_string
-)
-
-# Step 9: Set our Azure Blob Connection String.
-secret_client.set_secret(
-    name='azure-blob-connection-string',
-    value=blob_storage_connectiong_string
-)

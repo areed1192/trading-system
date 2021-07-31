@@ -1,0 +1,82 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run: RBAC Setup",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/rbac/setup_role.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Key Vault Setup",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/azure_resources/setup_key_vault.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Storage",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/azure_resources/setup_storage.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup SQL",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/azure_resources/setup_sql_server.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Data Factory",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/azure_resources/setup_data_factory.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Secrets",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/azure_resources/setup_key_vault_secrets.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Linked Services",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/pipelines/setup_linked_services.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Dataflows",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/pipelines/setup_dataflows.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Datasets",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/pipelines/setup_datasets.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Pipeline - Tickers",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/pipelines/setup_pipeline_tickers.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run: Setup Pipeline - Prices",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup/pipelines/setup_pipeline_prices.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
