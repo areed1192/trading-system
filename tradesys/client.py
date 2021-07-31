@@ -9,13 +9,15 @@ from azure.mgmt.datafactory import DataFactoryManagementClient
 
 class TradingSystem():
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes the `TradingSystem` object."""
 
         self.templates_client = AzureTemplates()
         self.credentials_client = TradingCredentials()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Generates the String Representation of the object."""
+
         return "<TradingSystem Initialized=True, Active=True>"
 
     @property

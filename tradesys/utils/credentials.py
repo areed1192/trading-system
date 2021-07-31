@@ -1,11 +1,12 @@
 import pathlib
+from typing import Union
 from configparser import ConfigParser
 from azure.identity import DefaultAzureCredential
 
 
 class TradingCredentials():
 
-    def __init__(self) -> None:
+    def __init__(self, config_file: Union[str, pathlib.Path] = None) -> None:
         """Initializes the `TradingCredentials` object.
 
         ### Overview
@@ -13,11 +14,19 @@ class TradingCredentials():
         This object helps interact with the `DefaultAzureCredential`
         object which will handle authentication of the different Azure
         resources.
+
+        ### Parameters
+        ----
+        config_file : Union[str, pathlib.Path] (optional, Default=None)
+            The location of your config file. If not provided, will
+            check the default location `config/config.ini`. Additionally,
+            this does assume you have a section, called `rbac_credentials`.
         """
 
         # Read the file.
-        config_folder = pathlib.Path(__file__).parents[2].joinpath('config/')
-        config_file = config_folder.joinpath('config.ini')
+        if not config_file:
+            config_folder = pathlib.Path(__file__).parents[2].joinpath('config/')
+            config_file = config_folder.joinpath('config.ini')
 
         self.config = ConfigParser()
         self.config.read(config_file)
@@ -37,7 +46,7 @@ class TradingCredentials():
             Your Azure Subscription ID.
         """
 
-        return self.config.get('azure_subscriptions', 'azure-data-migration')
+        return self.config.get('rbac_credentials', 'subscription_id')
 
     @property
     def tenant_id(self) -> str:
@@ -49,7 +58,7 @@ class TradingCredentials():
             Your Azure Tenant ID.
         """
 
-        return self.config.get('rbac_credentials', 'TENANT_ID')
+        return self.config.get('rbac_credentials', 'tenant_id')
 
     @property
     def client_id(self) -> str:
@@ -61,7 +70,7 @@ class TradingCredentials():
             Your Azure Client ID.
         """
 
-        return self.config.get('rbac_credentials', 'CLIENT_ID')
+        return self.config.get('rbac_credentials', 'client_id')
 
     @property
     def client_secret(self) -> str:
@@ -73,7 +82,7 @@ class TradingCredentials():
             Your Azure Client ID.
         """
 
-        return self.config.get('rbac_credentials', 'CLIENT_SECRET')
+        return self.config.get('rbac_credentials', 'client_secret')
 
     @property
     def azure_credentials(self) -> DefaultAzureCredential:

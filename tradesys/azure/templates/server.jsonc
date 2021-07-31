@@ -9,7 +9,7 @@
       "tenantId": "<ADMIN_TENANT_ID>",
       "azureADOnlyAuthentication": false
     },
-    "publicNetworkAccess": "Disabled",
+    "publicNetworkAccess": "Enabled",
     "restrictOutboundNetworkAccess": "Enabled"
   },
   "location": "eastus2"

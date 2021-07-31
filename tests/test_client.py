@@ -3,13 +3,22 @@ import unittest
 from unittest import TestCase
 from configparser import ConfigParser
 
+from tradesys.client import TradingSystem
+from tradesys.utils.templates import AzureTemplates
+from tradesys.utils.credentials import TradingCredentials
 
-class MySession(TestCase):
+from azure.mgmt.sql import SqlManagementClient
+from azure.mgmt.storage import StorageManagementClient
+from azure.mgmt.keyvault import KeyVaultManagementClient
+from azure.mgmt.datafactory import DataFactoryManagementClient
 
-    """Will perform a unit test for the <PLACEHOLDER> session."""
+
+class TradingFactorySessionTest(TestCase):
+
+    """Will perform a unit test for the `TradingSystem`."""
 
     def setUp(self) -> None:
-        """Set up the <PLACEHOLDER> Client."""
+        """Set up the `TradingSystem` Client Object."""
 
         # Initialize the Parser.
         config = ConfigParser()

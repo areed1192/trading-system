@@ -44,7 +44,7 @@ if CREATE_SERVER:
     sql_server_resource_template['properties']['administratorLoginPassword'] = SQL_SERVER_PASSWORD
 
     # Run the `CreateOrUpdate` operation.
-    create_server_operation = sql_mgmt_client.servers.begin_create_or_update(
+    create_server_operation = sql_mgmt_client.servers.create_or_update(
         resource_group_name='azure-data-migration',
         server_name='trading-system-sql-server',
         parameters=sql_server_resource_template
@@ -54,7 +54,7 @@ if CREATE_SERVER:
 if CREATE_DATABASE:
 
     # Run the `CreateOrUpdate` operation.
-    create_database_operation = sql_mgmt_client.databases.begin_create_or_update(
+    create_database_operation = sql_mgmt_client.databases.create_or_update(
         resource_group_name='azure-data-migration',
         server_name='trading-system-sql-server',
         database_name='trading-system',

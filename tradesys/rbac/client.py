@@ -2,6 +2,7 @@ import json
 import pathlib
 import subprocess
 import textwrap
+from typing import Union
 from configparser import ConfigParser
 from azure.cli.core import get_default_cli
 
@@ -18,6 +19,7 @@ class RoleBasedAccessControl():
             Your Azure Subscription ID.
         """
 
+        self.subscription_id = subscription_id
         self.dump_file = open('config/azure_cli.txt', 'w+')
         self.az_cli = get_default_cli()
 
@@ -47,7 +49,7 @@ class RoleBasedAccessControl():
 
         ### Parameters
         ----
-        subscription_name (str):
+        subscription_name : str
             Your Azure subscription name.
 
         ### Returns
@@ -73,10 +75,10 @@ class RoleBasedAccessControl():
 
         ### Parameters
         ----
-        subscription_name (str):
+        subscription_name : str
             Your Azure subscription name.
 
-        rbac_name (str):
+        rbac_name : str
             The name you want your RBAC object to be.
 
         ### Returns
@@ -111,8 +113,16 @@ class RoleBasedAccessControl():
             rbac_credentials = json.load(fp=rbac_file)
 
         return rbac_credentials
-    
-    def generate_config_files(self) -> None:
+
+    def generate_config_files(self, file_name: Union[str, pathlib.Path]) -> None:
+        """Generate a config.ini file where we can store our RBAC Credentials.
+
+        ### Parameters
+        ----
+        file_name : Union[str, pathlib.Path]
+            The location you want to store the config.ini
+            file.
+        """
 
         # Load the RBAC Config.
         with open(file="config/azure_rbac_auth_sp.json", mode='r') as rbac_file:
@@ -129,10 +139,37 @@ class RoleBasedAccessControl():
         config.set('rbac_credentials', 'client_id', rbac_config['clientId'])
         config.set('rbac_credentials', 'tenant_id', rbac_config['tenantId'])
         config.set('rbac_credentials', 'client_secret', rbac_config['clientSecret'])
+        config.set('rbac_credentials', 'subscription_id', rbac_config['subscriptionId'])
 
         # Write the file.
-        with open(file='config/config.ini', mode='w+') as f:
+        with open(file=file_name, mode='w+') as f:
             config.write(fp=f)
 
-    def set_environment_variables(self) -> dict:
-        pass
+    def generate_batch_scripts(self, file_name: Union[str, pathlib.Path]) -> None:
+        """Generate a .cmd file to set your environment variables
+        for Azure.
+
+        ### Parameters
+        ----
+        file_name : Union[str, pathlib.Path]
+            The location you want to store the .cmd
+            file.
+        """
+
+        # Load the RBAC Config.
+        with open(file="config/azure_rbac_auth_sp.json", mode='r') as rbac_file:
+            rbac_config = json.load(fp=rbac_file)
+
+        # Write the Command File.
+        with open(file=file_name, mode='w+') as cmd_file:
+
+            cmd_file.write(textwrap.dedent("""
+            REM Sets the Environment Variables that persist over sessions.
+            REM Make sure to run this as an administrator and then shut down VS Code
+            REM and re-open it.\n
+            """))
+
+            cmd_file.write(f"SETX AZURE_SUBSCRIPTION_ID {rbac_config['subscriptionId']}\n")
+            cmd_file.write(f"SETX AZURE_TENANT_ID {rbac_config['tenantId']}\n")
+            cmd_file.write(f"SETX AZURE_CLIENT_ID {rbac_config['clientId']}\n")
+            cmd_file.write(f"SETX AZURE_CLIENT_SECRET {rbac_config['clientSecret']}")
