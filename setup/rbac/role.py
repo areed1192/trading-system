@@ -11,12 +11,7 @@ rbac_client = RoleBasedAccessControl(subscription_id=subscription_id)
 if rbac_client.check_for_azure_cli():
 
     # Then create a new RBAC object.
-    print(
-        rbac_client.create_rbac(
-            subscription_name='azure-data-migration',
-            rbac_name='myTestRbac'
-        )
-    )
+    print(rbac_client.create_rbac(rbac_name='myTestRbac'))
 
     # Create our new config file.
     config_location = pathlib.Path("config/my_new_config.ini")
@@ -24,7 +19,7 @@ if rbac_client.check_for_azure_cli():
 
     # Create our new command file.
     script_location = pathlib.Path("config/my_new_script.cmd")
-    rbac_client.generate_batch_scripts(file_name=script_location)
+    rbac_client.generate_batch_script(file_name=script_location)
 
     # After these files are generated, make sure to run the new command file.
     # In this case the `my_new_script.cmd` file. On windows all you need to do

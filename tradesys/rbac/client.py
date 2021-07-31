@@ -44,13 +44,15 @@ class RoleBasedAccessControl():
         elif self.az_cli.result.error:
             return False
 
-    def set_subscription_account(self, subscription_name: str) -> dict:
+    def set_subscription_account(self, subscription: str = None) -> dict:
         """Sets the subscription that we wanth the RBAC to be created for.
 
         ### Parameters
         ----
-        subscription_name : str
-            Your Azure subscription name.
+        subscription_name : str (optional, Default=None)
+            Your Azure subscription name or ID. If nothing is provided
+            then your azure subscription ID is used when you initialized
+            the client.
 
         ### Returns
         ----
@@ -59,27 +61,31 @@ class RoleBasedAccessControl():
             or not.
         """
 
+        if not subscription:
+            subscription = self.subscription_id
+
         self.az_cli.invoke(
-            args=['account', 'set', '--subscription', subscription_name],
-            initial_invocation_data=None,
-            # out_file=self.dump_file
+            args=['account', 'set', '--subscription', subscription],
+            initial_invocation_data=None
         )
 
         if self.az_cli.result.result == None:
-            return {"message": f"Azure Subscription set to {subscription_name}."}
+            return {"message": f"Azure Subscription set to {subscription}."}
         elif self.az_cli.result.error:
             return {"message": "Azure operation failed."}
 
-    def create_rbac(self, subscription_name: str, rbac_name: str) -> dict:
+    def create_rbac(self, rbac_name: str, subscription: str = None) -> dict:
         """Creats a new role based service principal using the Azure CLI.
 
         ### Parameters
         ----
-        subscription_name : str
-            Your Azure subscription name.
-
         rbac_name : str
             The name you want your RBAC object to be.
+
+        subscription : str (optional, Default=None)
+            Your Azure subscription name or ID. If nothing is provided
+            then your azure subscription ID is used when you initialized
+            the client.
 
         ### Returns
         ----
@@ -89,7 +95,7 @@ class RoleBasedAccessControl():
 
         # Step 1: Set the `AzureSubscription` account.
         self.set_subscription_account(
-            subscription_name=subscription_name
+            subscription=subscription
         )
 
         config_folder = pathlib.Path(__file__).parents[2].joinpath('config/')
@@ -133,7 +139,6 @@ class RoleBasedAccessControl():
 
         # Add the Section.
         config.add_section('rbac_credentials')
-        config.add_section('azure_subscriptions')
 
         # Set the Values.
         config.set('rbac_credentials', 'client_id', rbac_config['clientId'])
@@ -145,7 +150,7 @@ class RoleBasedAccessControl():
         with open(file=file_name, mode='w+') as f:
             config.write(fp=f)
 
-    def generate_batch_scripts(self, file_name: Union[str, pathlib.Path]) -> None:
+    def generate_batch_script(self, file_name: Union[str, pathlib.Path]) -> None:
         """Generate a .cmd file to set your environment variables
         for Azure.
 

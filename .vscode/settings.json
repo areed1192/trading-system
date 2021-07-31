@@ -1,5 +1,15 @@
 {
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "azureML.defaultWorkspaceId": "/subscriptions/1c7dee43-5fce-4a52-9a52-c34aa004dfbc/resourceGroups/azure-data-migration/providers/Microsoft.MachineLearningServices/workspaces/sigma-machine-learning"
+  "azureML.defaultWorkspaceId": "/subscriptions/1c7dee43-5fce-4a52-9a52-c34aa004dfbc/resourceGroups/azure-data-migration/providers/Microsoft.MachineLearningServices/workspaces/sigma-machine-learning",
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./tests",
+    "-p",
+    "test_*.py"
+  ],
+  "python.testing.pytestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.unittestEnabled": true
 }
