@@ -26,7 +26,20 @@ setup(
 
     # Define dependencies.
     install_requires=[
-
+        'pyodbc==4.0.31',
+        'numpy==1.21.0',
+        'requests==2.25.1',
+        'pandas==1.2.5',
+        'azure-identity==1.6.0',
+        'azure-mgmt-core==1.3.0',
+        'azure-keyvault-secrets==4.3.0',
+        'azure-mgmt-keyvault==9.0.0',
+        'msrestazure==0.6.4',
+        'azure-mgmt-resource==18.0.0',
+        'azure-storage-blob==12.8.1',
+        'azure-mgmt-sql==3.0.0',
+        'azure-mgmt-storage==18.0.0',
+        'azure-mgmt-datafactory==1.1.0'
     ],
 
     # Specify folder content.
@@ -41,32 +54,10 @@ setup(
 
     # Define our classifiers.
     classifiers=[
-
-        # Phase of development my library is in.
-        'Development Status :: 3 - Alpha',
-
-        # Audience this library is intended for.
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'Intended Audience :: Financial and Insurance Industry',
-
-        # License that guides my library.
         'License :: OSI Approved :: MIT License',
-
-        # Package was written in English.
         'Natural Language :: English',
-
-        # Operating systems.
         'Operating System :: OS Independent',
-
-        # Programming Languages Used..
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-
-        # Topics.
-        'Topic :: Database',
-        'Topic :: Education',
-        'Topic :: Office/Business'
+        'Programming Language :: Python :: 3.8'
     ]
 
 )
