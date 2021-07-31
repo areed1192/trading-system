@@ -132,3 +132,4 @@ dmypy.json
 vscode/
 config/
 .resources and notes/
+tradesys/azure/responses/
