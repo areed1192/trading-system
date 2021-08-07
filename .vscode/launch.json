@@ -77,6 +77,13 @@
       "request": "launch",
       "program": "${workspaceFolder}/setup/pipelines/setup_pipeline_prices.py",
       "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to Python Functions",
+      "type": "python",
+      "request": "attach",
+      "port": 9091,
+      "preLaunchTask": "func: host start"
     }
   ]
 }

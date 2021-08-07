@@ -39,7 +39,9 @@ setup(
         'azure-storage-blob==12.8.1',
         'azure-mgmt-sql==3.0.0',
         'azure-mgmt-storage==18.0.0',
-        'azure-mgmt-datafactory==1.1.0'
+        'azure-mgmt-datafactory==1.1.0',
+        'azureml-core==1.33.0',
+        'azure-functions==1.7.2'
     ],
 
     # Specify folder content.
