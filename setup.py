@@ -27,7 +27,7 @@ setup(
     # Define dependencies.
     install_requires=[
         'pyodbc==4.0.31',
-        'numpy==1.21.0',
+        'numpy==1.22.0',
         'requests==2.25.1',
         'pandas==1.2.5',
         'azure-identity==1.6.0',
